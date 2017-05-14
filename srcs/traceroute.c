@@ -80,8 +80,8 @@ int		traceroute(struct sockaddr_in *dest)
 		perror("socket");
 		return (1);
 	}
-	if (fcntl(sd, F_SETFL, O_NONBLOCK) != 0)
-		perror("Request non blocking IO");
+	/* if (fcntl(sd, F_SETFL, O_NONBLOCK) != 0) */
+	/* 	perror("Request non blocking IO"); */
 	for (ttl = 1; ttl < 255; ttl++)
 	{
 		if (setsockopt(sd, 0, IP_TTL, &ttl, sizeof(ttl)) != 0)
