@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME		=	ft_traceroute
+SHELL		:=	/bin/bash
 
 CC			=	gcc
 W_FLAGS		=	-Wall -Wextra -Werror

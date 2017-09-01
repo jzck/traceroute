@@ -18,7 +18,6 @@ unsigned short checksum(void *b, int len)
 {
 	unsigned short	*buf = b;
 	unsigned int	sum=0;
-	unsigned short	result;
 
 	for (sum = 0; len > 1; len -= 2)
 		sum += *buf++;
@@ -26,8 +25,7 @@ unsigned short checksum(void *b, int len)
 		sum += *(unsigned char*)buf;
 	sum = (sum >> 16) + (sum & 0xFFFF);
 	sum += (sum >> 16);
-	result = ~sum;
-	return (result);
+	return (~sum);
 }
 
 int		wait_for_reply(struct sockaddr_in *addr, unsigned char buf[1024])
@@ -36,7 +34,7 @@ int		wait_for_reply(struct sockaddr_in *addr, unsigned char buf[1024])
 
 	if (sd == 0)
 	{
-		if ((sd = socket(PF_INET, SOCK_DGRAM, IPPROTO_ICMP)) < 0)
+		if ((sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP)) < 0)
 		{
 			perror("socket");
 			exit(0);
@@ -75,7 +73,7 @@ int		traceroute(struct sockaddr_in *dest)
 	struct timeval	t1, t2, trip;
 	double diff;
 
-	if ((sd = socket(PF_INET, SOCK_DGRAM, IPPROTO_ICMP)) < 0)
+	if ((sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP)) < 0)
 	{
 		perror("socket");
 		return (1);
