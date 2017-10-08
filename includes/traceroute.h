@@ -6,7 +6,7 @@
 /*   By: jhalford <jack@crans.org>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/22 14:10:24 by jhalford          #+#    #+#             */
-/*   Updated: 2017/04/22 15:52:07 by jhalford         ###   ########.fr       */
+/*   Updated: 2017/10/08 17:52:17 by jhalford         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@
 
 #define PACKETSIZE	56
 
-struct s_packet
+struct			s_packet
 {
-	struct icmp hdr;
-	char msg[PACKETSIZE - sizeof(struct icmp)];
+	struct icmp	hdr;
+	char		msg[PACKETSIZE - sizeof(struct icmp)];
 };
+
+void			traceroute(struct sockaddr *addr);
 
 #endif
