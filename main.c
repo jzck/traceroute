@@ -49,7 +49,7 @@ int				main(int ac, char **av)
 		printf("traceroute: Warning: %s has multiple addresses; using %s\n",
 				result->ai_canonname, ip);
 	printf("traceroute to %s (%s), %i hops max %i byte packets\n",
-			FT_TRY(result->ai_canonname, ip), ip, 64, PACKETSIZE);
+			result->ai_canonname, ip, 64, PACKETSIZE);
 	traceroute(result->ai_addr);
 	return (0);
 }

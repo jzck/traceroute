@@ -16,7 +16,7 @@ int			g_pid;
 
 static int	wait_for_reply(struct sockaddr *addr, unsigned char buf[1024])
 {
-	static int sd;
+	static int sd;;
 
 	sd = 0;
 	if (sd == 0)
@@ -53,11 +53,11 @@ static int	probe_once(int sd, struct sockaddr *addr,
 	bytes = wait_for_reply(addr, buf);
 	time = time_milli() - time;
 	if (bytes < 0)
-		ft_printf(" *");
+		printf(" *");
 	else
 	{
 		ip_load_icmp(icmp, buf);
-		ft_printf("  %.3f ms", time);
+		printf("  %.3f ms", time);
 	}
 	return (0);
 }
@@ -76,7 +76,7 @@ static int	probe_depth(int sd, struct sockaddr *addr,
 		pkt.hdr.icmp_cksum = cksum(&pkt, sizeof(pkt));
 		probe_once(sd, addr, &pkt, &icmp);
 	}
-	ft_putchar('\n');
+	printf("\n");
 	return (icmp.icmp_type == ICMP_ECHOREPLY);
 }
 
@@ -98,7 +98,7 @@ void		traceroute(struct sockaddr *addr)
 	ttl = 0;
 	while (++ttl < 255)
 	{
-		ft_printf("%2d ", ttl);
+		printf("%2d ", ttl);
 		if (setsockopt(sd, 0, IP_TTL, &ttl, sizeof(ttl)) != 0)
 		{
 			perror("set TTL option");

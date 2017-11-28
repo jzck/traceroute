@@ -10,16 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PING_H
-# define FT_PING_H
+#pragma once
 
-# include "libft.h"
-# include <fcntl.h>
-# include <errno.h>
+# include "error.h"
+# include "cliopts.h"
+
+# include <unistd.h>
+# include <stdlib.h>
+
 # include <sys/socket.h>
 # include <sys/time.h>
+# include <sys/types.h>
+
+# include <fcntl.h>
+# include <errno.h>
 # include <resolv.h>
 # include <netdb.h>
+# include <arpa/inet.h>
 # include <netinet/in.h>
 # include <netinet/ip.h>
 # include <netinet/ip_icmp.h>
@@ -33,5 +40,7 @@ struct			s_packet
 };
 
 void			traceroute(struct sockaddr *addr);
-
-#endif
+unsigned short	cksum(void *b, int len);
+int				host_format(struct sockaddr *addr);
+void			ip_load_icmp(struct icmp *icmp, void *buf);
+double			time_milli(void);
